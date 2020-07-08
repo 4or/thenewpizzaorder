@@ -3,12 +3,7 @@ import React, { Component } from 'react';
 
 class OrderMenu extends Component {
  constructor(props){
-     super(props)
-     this.state = {
-         orderCount:0,
-         orderCard: [ ]
-     } 
-
+     super(props);
  } 
     render() {
         return (

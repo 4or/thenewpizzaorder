@@ -13,8 +13,7 @@ import {product} from '../../dumpdata/index'
 class OrderFoodApp extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {
-        items: [],
+      this.state = { 
         quantity: 0,
         amountPay: 0,
         itemsInCart: [],
@@ -28,11 +27,11 @@ class OrderFoodApp extends React.Component {
       this.setState({itemsInCart: [],quantity:0}) 
     }  
     addToCart = (item) => {
+
         let itemsInCart = this.state.itemsInCart;
         itemsInCart.push(item);  
         product.map( incarts => { if(incarts.id === item.id){ incarts.inCart = true} return true; })
         product.map( quant => quant.id === item.id ? quant.quantityInCart += 1 : 0) 
-        
         
         this.setState({
           quantity: this.state.quantity +=1,

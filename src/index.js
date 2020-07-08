@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import OrderFoodApp from './App/Component/OrderFoodApp/index';
+import App from './App.js';
 
-//  ---------------  Apollo Server 
+//  ---------------  Apollo Client 
 import ApolloClient from "apollo-client";
 import { ApolloProvider } from "react-apollo";
 import { HttpLink } from "apollo-link-http"; 
@@ -12,8 +12,10 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
  
+
 const localGraphQL = new HttpLink({
-    uri:"https://theneworderbackend.herokuapp.com" ,
+    // your graphql endpoint 
+    uri:"http://localhost:4000/graohql" ,
     credentials: "same-origin"
 });
   
@@ -30,11 +32,11 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
   
-const App = (
+const AppProvider = (
     <ApolloProvider client={client}> 
-        <OrderFoodApp />
+        <App />
     </ApolloProvider>
 );
 
 
-ReactDOM.render(App, document.getElementById('root'));
+ReactDOM.render(AppProvider, document.getElementById('root'));

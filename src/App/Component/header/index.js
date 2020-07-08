@@ -4,13 +4,6 @@ import FoodSelectedList from "../FoodList"
 class OrderHeader extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      items: [],
-      quantity: 0,
-      amountToPay: 0,
-      itemsInCart: []
-    }
-
   }
 
   render() {

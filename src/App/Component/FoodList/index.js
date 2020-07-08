@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import OrderSubmit from '../SubmitOrder'
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import { PizremoveDuplicates } from '../../service/index'
+import "bootstrap/dist/css/bootstrap.min.css"; 
 
 class FoodSelectedList extends Component {
 
@@ -13,6 +12,7 @@ class FoodSelectedList extends Component {
     total: 0,
     currency: "USD"
   }
+
   TotalCost = () => {
     let amount = 0;
     for (let i = 0; i <= this.props.data.length; i++) {
@@ -118,7 +118,7 @@ class FoodSelectedList extends Component {
                   </div>
                 </div>
                 : <div></div>
-            }
+              }
             {this.props.data.length > 0 ? <OrderSubmit removeCart={this.props.removeCart} currency={this.state.currency} data={this.props.data} total={this.state.currency === "USD" ? this.TotalCost() * 1 + 3 : Number(parseFloat(this.TotalCost() * 0.88 + 3).toFixed())} /> : <div></div>}
           </Modal.Body>
         </Modal>
