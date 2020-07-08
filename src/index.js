@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
  
 const localGraphQL = new HttpLink({
-    uri:"http://localhost:4000/graphql" ,
+    uri:"https://backahmedbejaoui.herokuapp.com/graphql" ,
     credentials: "same-origin"
 });
   

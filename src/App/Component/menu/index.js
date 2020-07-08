@@ -20,12 +20,12 @@ class OrderMenu extends Component {
                             return (
                                 <div className="col-sm-3" style={{ padding:"25px"}} key={item.id}>
                                     <img className="card-img-top" src={require('./1.jpg')} alt="Food " />
-                                    <div className="card" key={item.id}> 
+                                    <div className="card bg-light " key={item.id}> 
                                         <div className="card-body">
-                                            <h5 className="card-title">{item.productName}</h5>
-                                            <p className="card-text" style={{ maxHeight:"25px" }}>{item.productDescription}</p> <br />
+                                            <h5 className="card-title  font-weight-bold">{item.productName}</h5>
+                                            <p className="card-text font-weight-light" style={{ maxHeight:"25px" }}>{item.productDescription}</p> <br />
                                             <p className="card-text">${item.price} </p>
-                                            <a href="#" className={item.inCart ? "btn btn-primary disabled" : "btn btn-primary"}  onClick={()=> this.props.addToCart(item)} >{item.inCart ? "Order in Cart"  : "Add to Cart"}</a>
+                                            <a className={item.inCart ? "btn btn-primary disabled" : "btn btn-primary"}  onClick={()=> this.props.addToCart(item)} style={{color:"white"}} >{item.inCart ? "Order in Cart"  : "Add to Cart"}</a>
                                         </div>
                                     </div>
                                 </div>

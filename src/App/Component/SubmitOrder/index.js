@@ -38,7 +38,8 @@ class OrderSubmit extends Component {
         zip: "",
         order_name_quantity_price: [],
         currency: "",
-        totalprice: 0
+        totalprice: 0,
+        success:""
     }
 
     // This For the Modle handle
@@ -46,29 +47,27 @@ class OrderSubmit extends Component {
 
     // Handle Client Input
     handleChange = (e) => {
-
         this.setState({
             [e.target.name]: e.target.value, 
             totalprice: this.props.total,
             currency: this.props.currency
-        })
-        console.log(this.state)
+        }) 
     }
     render() {
         let { name, surname, address, city, state, zip, currency, totalprice } = this.state
         return (
-            <>
-                {console.log(this.props.currency, this.props.total)}
+            <> 
                 <Button color="primary" onClick={this.toggle} style={{ margin: "12px" }}>Send Order</Button>
                 <Modal show={this.state.isOpen} onHide={() => this.setState({ isOpen: !this.state.isOpen })}>
                     <Modal.Header>
                         <Modal.Title>Order details</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Mutation mutation={mutationone}>
+                        <Mutation mutation={mutationone} onCompleted={data=> this.setState({success: data.SendOrder.success})}>
                             {
                                 submitfunc => (<Form onSubmit={
-                                   (e) => { 
+                                   (e) => {  
+                                       e.preventDefault()
                                     submitfunc({ variables: { name, surname, address, city, state, zip, order_name_quantity_price:this.props.data, currency, totalprice } })
                                    }
                                 }>
@@ -115,6 +114,8 @@ class OrderSubmit extends Component {
                                 )}
                         </Mutation>
                     </Modal.Body>
+                        { this.state.success ? <div className="alert alert-success" role="alert"> {this.state.success} </div> : <div></div> }
+                        { this.state.success ? setTimeout(()=> window.location.reload(false),2000) : <div></div> }
                 </Modal>
             </>
         )

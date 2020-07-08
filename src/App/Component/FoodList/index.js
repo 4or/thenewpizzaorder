@@ -116,9 +116,8 @@ class FoodSelectedList extends Component {
                   </div>
                 </div>
                 : <div></div>
-            }
-            {this.props.data.length > 0 ? console.log("this is data ", this.props.data) : ""}
-            {this.props.data.length > 0 ? <OrderSubmit currency={this.state.currency} data={this.props.data} total={this.state.currency === "USD" ? this.TotalCost() * 1 + 3 : Number(parseFloat(this.TotalCost() * 0.88 + 3).toFixed()) }/> : <div></div>}
+            } 
+            {this.props.data.length > 0 ? <OrderSubmit removeCart={this.props.removeCart} currency={this.state.currency} data={this.props.data} total={this.state.currency === "USD" ? this.TotalCost() * 1 + 3 : Number(parseFloat(this.TotalCost() * 0.88 + 3).toFixed()) }/> : <div></div>}
           </Modal.Body>
         </Modal>
       </div>
