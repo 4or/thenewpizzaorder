@@ -11,8 +11,7 @@ class FoodSelectedList extends Component {
     modalShow: false,
     quantityPrice: 0,
     total: 0,
-    currency: "USD",
-    all: []
+    currency: "USD"
   }
   TotalCost = () => {
     let amount = 0;
@@ -73,7 +72,7 @@ class FoodSelectedList extends Component {
                             <tr>
                               <th scope="row">${item.price}</th>
                               <td className="w-25">
-                                <img src={require("./1.jpg")} style={{ borderRadius: "25px" }} className="img-fluid img-thumbnail" alt="Sheep"></img>
+                                <img src={require(`../../../assets/image/${item.img}`)} style={{ borderRadius: "25px", height: "150px" }} className="img-fluid img-thumbnail" alt="Sheep"></img>
                               </td>
                               <td>{item.productName ? item.productName : ""}</td>
                               <td>
@@ -82,8 +81,6 @@ class FoodSelectedList extends Component {
                                   this.setState({
                                     total: item.totalprice
                                   })
-                                  var ItemPushed = this.state.all.concat(item);
-                                  this.setState({ all: PizremoveDuplicates(ItemPushed, "id") })
                                 }} />
                               </td>
                               <th scope="col"></th>
@@ -102,7 +99,12 @@ class FoodSelectedList extends Component {
                 <div className="card">
                   <div className="card-body">
                     Total Price : {this.state.currency === "USD" || this.state.currency === "" ? `$ ${this.TotalCost() * 1}` : `€ ${parseFloat(this.TotalCost() * 0.88).toFixed(2)}`} <br />
-                    With Cost Delivery : {this.state.currency === "USD" ? `$ ${this.TotalCost() * 1 + 3}` : `€ ${parseFloat(this.TotalCost() * 0.88 + 3).toFixed()}`}
+                    With Cost Delivery : {this.state.currency === "USD" ? `$ ${this.TotalCost() * 1 + 3}` : `€ ${parseFloat(this.TotalCost() * 0.88 + 3).toFixed()}`} &nbsp;
+                     <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-truck" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5v7h-1v-7a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5v1A1.5 1.5 0 0 1 0 10.5v-7zM4.5 11h6v1h-6v-1z" />
+                      <path fillRule="evenodd" d="M11 5h2.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5h-1v-1h1a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4.5h-1V5zm-8 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                      <path fillRule="evenodd" d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 1a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                    </svg>
                     <div>
                       <div className="form-check form-check-inline">
                         <input className="form-check-input" type="radio" name="inlineRadioOptions" id="UsdRadio" value="USD" onClick={this.SetCurrency} onChange={this.SetCurrency} />
@@ -116,8 +118,8 @@ class FoodSelectedList extends Component {
                   </div>
                 </div>
                 : <div></div>
-            } 
-            {this.props.data.length > 0 ? <OrderSubmit removeCart={this.props.removeCart} currency={this.state.currency} data={this.props.data} total={this.state.currency === "USD" ? this.TotalCost() * 1 + 3 : Number(parseFloat(this.TotalCost() * 0.88 + 3).toFixed()) }/> : <div></div>}
+            }
+            {this.props.data.length > 0 ? <OrderSubmit removeCart={this.props.removeCart} currency={this.state.currency} data={this.props.data} total={this.state.currency === "USD" ? this.TotalCost() * 1 + 3 : Number(parseFloat(this.TotalCost() * 0.88 + 3).toFixed())} /> : <div></div>}
           </Modal.Body>
         </Modal>
       </div>

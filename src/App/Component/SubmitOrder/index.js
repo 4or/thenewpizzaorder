@@ -13,12 +13,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const mutationone = gql`
 
 mutation ($name: String ,$surname: String , $address: String
-  $city: String, $state: String, $zip: String ,$order_name_quantity_price:[QuserOrderNamePrice!] 
-  $currency: String $totalprice: Int){
-    
+  $city: String, $state: String, $zip: String ,$order_name_quantity_price:[QuserOrderNamePrice!]
+  $currency: String $totalprice: Int ){
+
   SendOrder(
   input:{
     name:$name,surname: $surname, address: $address
+    
     city: $city, state: $state, zip: $zip ,order_name_quantity_price: $order_name_quantity_price
     currency: $currency totalprice: $totalprice}) {success}
 }
@@ -39,7 +40,8 @@ class OrderSubmit extends Component {
         order_name_quantity_price: [],
         currency: "",
         totalprice: 0,
-        success:""
+        success:"",
+        GetError:false
     }
 
     // This For the Modle handle
@@ -48,27 +50,32 @@ class OrderSubmit extends Component {
     // Handle Client Input
     handleChange = (e) => {
         this.setState({
-            [e.target.name]: e.target.value, 
+            [e.target.name]: e.target.value,
             totalprice: this.props.total,
             currency: this.props.currency
-        }) 
+        })
     }
     render() {
         let { name, surname, address, city, state, zip, currency, totalprice } = this.state
+
         return (
-            <> 
+            <>
                 <Button color="primary" onClick={this.toggle} style={{ margin: "12px" }}>Send Order</Button>
                 <Modal show={this.state.isOpen} onHide={() => this.setState({ isOpen: !this.state.isOpen })}>
                     <Modal.Header>
-                        <Modal.Title>Order details</Modal.Title>
+                        <Modal.Title>Order Information</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Mutation mutation={mutationone} onCompleted={data=> this.setState({success: data.SendOrder.success})}>
                             {
-                                submitfunc => (<Form onSubmit={
-                                   (e) => {  
+                                 (submitfunc, {loading, error }) => (<Form onSubmit={
+                                   (e) => {
+                                     console.log(this.props.data)
                                        e.preventDefault()
-                                    submitfunc({ variables: { name, surname, address, city, state, zip, order_name_quantity_price:this.props.data, currency, totalprice } })
+                                    submitfunc({ variables: { name, surname, address, city, state, zip, order_name_quantity_price:this.props.data, currency, totalprice } }).catch(Ero=>{
+                                        // Error Handling if the back end or the request have been blocked or other type of network Errors
+                                        Ero.message.length > 0 ? this.setState({GetError : true}) : this.setState({GetError : false})
+                                    })
                                    }
                                 }>
                                     <Row form>
@@ -114,8 +121,9 @@ class OrderSubmit extends Component {
                                 )}
                         </Mutation>
                     </Modal.Body>
-                        { this.state.success ? <div className="alert alert-success" role="alert"> {this.state.success} </div> : <div></div> }
-                        { this.state.success ? setTimeout(()=> window.location.reload(false),2000) : <div></div> }
+                         { this.state.success && !this.state.GetError ? <div className="alert alert-success" role="alert"> {this.state.success} </div> : <div></div> }
+                         { this.state.GetError ? <div className="alert alert-danger" role="alert"> Order did not successfully send. Please try again! </div> : <div></div> }
+                         { this.state.success && !this.state.GetError ? setTimeout(()=> window.location.reload(false),2000) : <div></div> }
                 </Modal>
             </>
         )

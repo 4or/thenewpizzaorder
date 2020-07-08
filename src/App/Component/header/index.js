@@ -20,7 +20,6 @@ class OrderHeader extends React.Component {
           <a href='/' className="navbar-brand">The New Pizza Order</a>
           <div style={{ padding: "15px" }}>
             <FoodSelectedList  removeCart={this.props.removeCart}  count={this.props.quantity} data={this.props.data}  TotalPriceToPay={this.props.TotalPriceToPay} state={this.props.state} /> 
-            {/* <a className="navbar-brand">Login</a> */}
           </div>
         </nav>
       </header>
