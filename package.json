@@ -21,7 +21,7 @@
     "react-scripts": "^2.1.1",
     "reactstrap": "^8.5.1"
   },
-  "homepage": ".",
+  "homepage": "/",
   "scripts": {
     "start": "node start",
     "build": "react-scripts build",
