@@ -4,9 +4,9 @@
 
 # features
 
-<!-- CLIENT --> Login, Authenticate the user, Client can submit order with Email, give order history   
+# <!-- CLIENT --> Login, Authenticate the user, Client can submit order with Email, give order history   
 
-<!-- ADMIN --> dashboard, history of order for all client, Pie and Line chart
+# <!-- ADMIN --> dashboard, history of order for all client, Pie and Line chart
 
 ## Author
 
