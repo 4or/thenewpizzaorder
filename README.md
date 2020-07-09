@@ -2,7 +2,7 @@
 
 - [live demo](https://thenewpizzaorder.herokuapp.com/)
 
-# features
+# features will be added
 
 - CLIENT --> Login, Authenticate the user, Client can submit order with Email, give order history   
 
